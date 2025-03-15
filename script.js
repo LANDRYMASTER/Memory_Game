@@ -1,41 +1,118 @@
-let play = document.querySelector(".jouez > svg");
-let back = document.querySelector(".Game > svg");
+let melody = document.querySelector("#melody");
+let page = document.querySelector("body");
 let Game = document.querySelector(".Game");
-// let seconde2 = document.querySelector(".second2");
-// let seconde1 = document.querySelector(".second1");
-// let minute2 = document.querySelector(".min2");
-// let minute1 = document.querySelector(".min1");
-// let compteur = document.querySelector("#compteur");
-// let melody = document.querySelector("#melody");
+let control = document.querySelector(".play");
+let carte = document.getElementsByClassName("contain");
+let trap = document.querySelector(".tag");
+let seconde2 = document.querySelector(".second2");
+let seconde1 = document.querySelector(".second1");
+let minute2 = document.querySelector(".min2");
+let minute1 = document.querySelector(".min1");
+let refresh = document.querySelectorAll(".control");
 
-window.addEventListener("load", () => {
+
+let tap = 0;
+let chance1 = "";
+let chance2 = "";
+let memory = "";
+let choix = 0;
+let a = [];
+let congrat = 0;
+
+
+page.addEventListener("mouseover", () => {
     melody.play();
 });
 
-play.addEventListener("click", () => {
+for (let i of refresh) {
+    i.addEventListener("click" , () => {
+        Game.classList.toggle("Slide");
+        seconde2.innerText = "0";
+        seconde1.innerText = "0";
+        minute2.innerText = "0";
+        minute1.innerText = "0";
+        tap = 0;
+        chance1 = "";
+        chance2 = "";
+        memory = "";
+        choix = 0;
+        a = [];
+        congrat = 0;
+        for (let i of carte) {
+            i.classList.remove("visible");
+        }
+        trap.innerText = "0";
+    });
+}
+
+control.addEventListener("click", () => {
     Game.classList.toggle("Slide");
 });
 
-back.addEventListener("click", () => {
-    Game.classList.toggle("Slide");
-});
+for (let i of carte) {
+    i.addEventListener("click", () => {
+        tap += 1;
+        choix += 1;
+        i.classList.toggle("visible");
+        trap.innerText = parseInt(trap.innerText) + 1;
+        if (choix == 1) {
+            chance1 = i.getAttribute("code");
+            a.push(i);
+        }
+        if (choix == 2) {
+            chance2 = i.getAttribute("code");
+            a.push(i);
+            setTimeout(() => {
+                if ( chance1 != chance2 ) {
+                    for (let i of a ) {
+                        i.classList.toggle("visible");
+                        choix = 0;
+                        a = [];
+                    }
+                }
+                else {
+                    choix = 0;
+                    a = [];
+                    congrat += 1;
+                }
+                if ( congrat == 6 ) {
+                    memory = tap;
+                    tap = 0;
+                }
+            }, 500);
+        }
+    });
+}
 
-//   setInterval(() => {
-//     seconde2.innerText = parseInt(seconde2.innerText) + 1;
-//     if (parseInt(seconde2.innerText) == 10 ) {
-//         seconde2.innerText = "0";
-//         seconde1.innerText = parseInt(seconde1.innerText) + 1;
-//     }
-//     if (parseInt(seconde1.innerText) == 6) {
-//         seconde2.innerText = "0";
-//         seconde1.innerText = "0";
-//         minute2.innerText = parseInt(minute2.innerText) + 1;
-//     }
-//     if (parseInt(minute2.innerText) == 10) {
-//         seconde2.innerText = "0";
-//         seconde1.innerText = "0";
-//         minute2.innerText = "0";
-//         minute1.innerText = parseInt(minute1.innerText) + 1;
-//     }
-// }, 1000);
+setInterval(() => {
+if ( tap > 0 ) {
+    seconde2.innerText = parseInt(seconde2.innerText) + 1;
+    if (parseInt(seconde2.innerText) == 10 ) {
+        seconde2.innerText = "0";
+        seconde1.innerText = parseInt(seconde1.innerText) + 1;
+    }
+    if (parseInt(seconde1.innerText) == 6) {
+        seconde2.innerText = "0";
+        seconde1.innerText = "0";
+        minute2.innerText = parseInt(minute2.innerText) + 1;
+    }
+    if (parseInt(minute2.innerText) == 10) {
+        seconde2.innerText = "0";
+        seconde1.innerText = "0";
+        minute2.innerText = "0";
+        minute1.innerText = parseInt(minute1.innerText) + 1;
+    }
+}
+}, 1000);
+ 
+
+
+
+
+
+
+
+
+
+
 
