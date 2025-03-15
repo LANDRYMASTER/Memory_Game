@@ -63,7 +63,6 @@ for (let i of carte) {
         tap += 1;
         choix += 1;
         i.classList.toggle("visible");
-        trap.innerText = parseInt(trap.innerText) + 1;
         if (choix == 1) {
             chance1 = i.getAttribute("code");
             a.push(i);
@@ -83,6 +82,7 @@ for (let i of carte) {
                     choix = 0;
                     a = [];
                     congrat += 1;
+                    trap.innerText = parseInt(trap.innerText) + 12;
                 }
                 if ( congrat == 6 ) {
                     memory = tap;
