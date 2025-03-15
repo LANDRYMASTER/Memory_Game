@@ -196,7 +196,7 @@ main {
 
 .tap {
     box-shadow: inset 0px 0px 20px whitesmoke;
-    padding: 20px 70px;
+    padding: 20px 30px;
     border-radius: 25px;
     display: flex;
     justify-content: center;
@@ -232,5 +232,57 @@ main {
     aspect-ratio: 1;
     fill: none;
     stroke: white;
+    cursor: pointer;
+}
+
+
+.pop_over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    pointer-events: none;
+    scale: 1.2;
+    transition: 0.3s;
+
+}
+
+.dialog {
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.dialog svg {
+    width: 50px;
+    aspect-ratio: 1;
+    fill: none;
+    stroke: #ffff00;
+}
+
+.affiche {
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.5s;
+    scale: 1;
+}
+
+.dialog button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(41, 14, 14);
+    color: white;
+    font-size: 20px;
     cursor: pointer;
 }

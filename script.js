@@ -9,6 +9,9 @@ let seconde1 = document.querySelector(".second1");
 let minute2 = document.querySelector(".min2");
 let minute1 = document.querySelector(".min1");
 let refresh = document.querySelectorAll(".control");
+let dialog = document.querySelector(".pop_over");
+let confirmer = document.querySelector(".confirm");
+let box = document.querySelector(".dialog");
 
 
 let tap = 0;
@@ -19,30 +22,36 @@ let choix = 0;
 let a = [];
 let congrat = 0;
 
+let actu = () => {
+    Game.classList.toggle("Slide");
+    seconde2.innerText = "0";
+    seconde1.innerText = "0";
+    minute2.innerText = "0";
+    minute1.innerText = "0";
+    tap = 0;
+    chance1 = "";
+    chance2 = "";
+    memory = "";
+    choix = 0;
+    a = [];
+    congrat = 0;
+    for (let i of carte) {
+        i.classList.remove("visible");
+    }
+    trap.innerText = "0";
+};
+
+confirmer.addEventListener("click" , () => {
+    dialog.classList.remove("affiche");
+    actu();
+});
 
 page.addEventListener("mouseover", () => {
     melody.play();
 });
 
 for (let i of refresh) {
-    i.addEventListener("click" , () => {
-        Game.classList.toggle("Slide");
-        seconde2.innerText = "0";
-        seconde1.innerText = "0";
-        minute2.innerText = "0";
-        minute1.innerText = "0";
-        tap = 0;
-        chance1 = "";
-        chance2 = "";
-        memory = "";
-        choix = 0;
-        a = [];
-        congrat = 0;
-        for (let i of carte) {
-            i.classList.remove("visible");
-        }
-        trap.innerText = "0";
-    });
+    i.addEventListener("click" , actu );
 }
 
 control.addEventListener("click", () => {
@@ -78,11 +87,14 @@ for (let i of carte) {
                 if ( congrat == 6 ) {
                     memory = tap;
                     tap = 0;
+                    dialog.classList.toggle("affiche");
                 }
             }, 500);
         }
     });
 }
+
+
 
 setInterval(() => {
 if ( tap > 0 ) {
